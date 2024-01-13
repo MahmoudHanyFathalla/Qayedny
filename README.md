@@ -1,0 +1,1 @@
+Qayedny is a vibrant community where the exchange of services is not bound by money. Instead, we've created a platform where individuals, businesses, and freelancers can easily swap their services using their free time as a currency. We've shifted the focus from dollars and cents to the value of time invested.
