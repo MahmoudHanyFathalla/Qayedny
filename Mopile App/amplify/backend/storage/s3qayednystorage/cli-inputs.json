@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3qayednystorage",
+  "bucketName": "qayedny-storage",
+  "policyUUID": "92f80d8a",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

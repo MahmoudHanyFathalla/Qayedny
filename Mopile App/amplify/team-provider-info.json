@@ -1,0 +1,72 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-qayedny-staging-15023-authRole",
+      "UnauthRoleArn": "arn:aws:iam::835784410213:role/amplify-qayedny-staging-15023-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::835784410213:role/amplify-qayedny-staging-15023-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-qayedny-staging-15023-deployment",
+      "UnauthRoleName": "amplify-qayedny-staging-15023-unauthRole",
+      "StackName": "amplify-qayedny-staging-15023",
+      "StackId": "arn:aws:cloudformation:eu-north-1:835784410213:stack/amplify-qayedny-staging-15023/2ba20410-8747-11ee-976e-0a9c323915dc",
+      "AmplifyAppId": "dknrpv9eg94wd"
+    },
+    "categories": {
+      "auth": {
+        "qayednye7bebd3a": {},
+        "Qayedny": {}
+      },
+      "storage": {
+        "s3qayednystorage": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-qayedny-dev-03708-authRole",
+      "UnauthRoleArn": "arn:aws:iam::835784410213:role/amplify-qayedny-dev-03708-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::835784410213:role/amplify-qayedny-dev-03708-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-qayedny-dev-03708-deployment",
+      "UnauthRoleName": "amplify-qayedny-dev-03708-unauthRole",
+      "StackName": "amplify-qayedny-dev-03708",
+      "StackId": "arn:aws:cloudformation:eu-north-1:835784410213:stack/amplify-qayedny-dev-03708/83cd6470-8d75-11ee-9c83-0a39a43a540e",
+      "AmplifyAppId": "dknrpv9eg94wd"
+    },
+    "categories": {
+      "auth": {
+        "Qayedny": {}
+      },
+      "api": {
+        "Qayedny": {}
+      },
+      "storage": {
+        "s3qayednystorage": {}
+      }
+    }
+  },
+  "deve": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-qayedny-deve-233519-authRole",
+      "UnauthRoleArn": "arn:aws:iam::835784410213:role/amplify-qayedny-deve-233519-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::835784410213:role/amplify-qayedny-deve-233519-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-qayedny-deve-233519-deployment",
+      "UnauthRoleName": "amplify-qayedny-deve-233519-unauthRole",
+      "StackName": "amplify-qayedny-deve-233519",
+      "StackId": "arn:aws:cloudformation:eu-north-1:835784410213:stack/amplify-qayedny-deve-233519/36271640-8eff-11ee-af5c-0e54438f2f36",
+      "AmplifyAppId": "dknrpv9eg94wd"
+    },
+    "categories": {
+      "auth": {
+        "Qayedny": {}
+      },
+      "api": {
+        "Qayedny": {}
+      },
+      "storage": {
+        "s3qayednystorage": {}
+      }
+    }
+  }
+}

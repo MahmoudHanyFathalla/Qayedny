@@ -1,0 +1,221 @@
+enum ESubscriptionType {
+  USER
+  STARTUP
+}
+
+type DoneBy @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  RDoneByUser: User @hasOne
+  RProjectDone: [Project] @hasMany(indexName: "byDoneBy", fields: ["id"])
+  RServiceDone: [Service] @hasMany(indexName: "byDoneBy", fields: ["id"])
+}
+
+enum ESubscriptionDuration {
+  MONTHLY
+  SEMI_ANNUALLY
+  YEARLY
+}
+
+type Subscriptions @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Duration: ESubscriptionDuration!
+  Value: String!
+  Type: ESubscriptionType!
+}
+
+type Promocode @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Code: String!
+  Title: String
+  TPs: Int!
+  Active: Boolean!
+}
+
+enum ETransactionStatus {
+  ONHOLD
+  PENDING
+  APPROVED
+  FAILED
+}
+
+enum ETransactionType {
+  PROJECT
+  SERVICE
+  COUPON
+  SUBSCRIPTION
+  PROMOCODE
+}
+
+enum EInOrOut {
+  IN
+  OUT
+}
+
+enum ETpsOrMoney {
+  TPS
+  MONEY
+}
+
+type Transaction @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  FinishedDate: AWSDate
+  TpsOrMoney: ETpsOrMoney!
+  INOrOut: EInOrOut!
+  Value: Int
+  Status: ETransactionStatus!
+  Type: ETransactionType!
+  RProject: Project @hasOne
+  RService: Service @hasOne
+  RCoupon: Coupon @hasOne
+  RPromocode: Promocode @hasOne
+  RSubscriptions: Subscriptions @hasOne
+}
+
+enum ECouponTag {
+  TRANSPORTATION
+  RESTAURANTS
+  TELECOMMUNICATIONS
+}
+
+enum ECouponType {
+  PERCENTAGE
+  FREE
+}
+
+type Coupon @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Title: String
+  Subtitle: String
+  Image: AWSURL
+  Type: ECouponType
+  Price: Int
+  ExpirationDate: AWSDate
+  RulesInfo: String
+  NumberOfRedeems: Int
+  QRgenerate: String
+  Tags: [ECouponTag]!
+  Active: Boolean
+  Sharelink: AWSURL
+  RUserRedeemed: [User] @manyToMany(relationName: "CouponUser")
+}
+
+enum EServiceStatus {
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+type Service @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Title: String
+  Description: String
+  Category: ECategory
+  Price: Int
+  Active: Boolean
+  Status: EServiceStatus
+  Imgae: AWSURL
+  userID: ID! @index(name: "byUser")
+  RUser: User @belongsTo(fields: ["userID"])
+  RReviews: [Review] @hasMany(indexName: "byService", fields: ["id"])
+  donebyID: ID! @index(name: "byDoneBy")
+  RDoneBy: DoneBy @belongsTo(fields: ["donebyID"])
+}
+
+enum ESkills {
+  PROGRAMMING
+  ENGLISH
+}
+
+enum EFreelancerType {
+  STUDENT
+  INDIVIDUAL
+  COMPANY
+  FREELANCER
+  GROUP
+}
+
+enum EProjectStatus {
+  POSTED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum EPricingType {
+  FIXED
+  HOURLY
+}
+
+enum ECategory {
+  ANDROID_DEVELOPER
+  APPS_DEVELOPEMENTS
+}
+
+type Project @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Title: String
+  Description: String
+  Image: AWSURL
+  Category: ECategory
+  PricingType: EPricingType
+  Price: Int
+  EstimatedHours: Int
+  Status: EProjectStatus
+  Views: Int
+  Proposal: Int
+  FreelancerType: EFreelancerType
+  RReview: Review @hasOne
+  Skills: [ESkills]
+  userID: ID! @index(name: "byUser")
+  RUser: User @belongsTo(fields: ["userID"])
+  donebyID: ID! @index(name: "byDoneBy")
+  ProposedUser: [ID]
+  RDoneBy: DoneBy @belongsTo(fields: ["donebyID"])
+}
+
+type Review @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  RUser: User @belongsTo(fields: ["userID"])
+  Title: String
+  Description: String
+  Rate: Int
+  serviceID: ID! @index(name: "byService")
+}
+
+enum EUserType {
+  STUDENT
+  FREELANCER
+  PROFESSIONAL
+}
+
+type UserProfile @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  ProfilePicture: AWSURL
+  WorkedHours: Int!
+  About: String
+}
+
+type UserInfo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Name: String!
+  Email: AWSEmail!
+  Password: String!
+  Mobile: AWSPhone!
+  Dateofbirth: AWSDate
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  RUserProfile: UserProfile @hasOne
+  RUserInfo: UserInfo @hasOne
+  Wallet: Int
+  UserType: EUserType!
+  RReviews: [Review] @hasMany(indexName: "byUser", fields: ["id"])
+  RHaveProjects: [Project] @hasMany(indexName: "byUser", fields: ["id"])
+  AppliedProjects: [ID]
+  RHaveServices: [Service] @hasMany(indexName: "byUser", fields: ["id"])
+  RCouponsRedeemed: [Coupon] @manyToMany(relationName: "CouponUser")
+  AppliedServices: [ID]
+}
+ 
